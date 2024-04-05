@@ -1,0 +1,44 @@
+#registerForm {
+  height: 85vh;
+  width: 25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 40px;
+  border: 1px black solid;
+
+  margin: 1rem auto 0 auto;
+  background-color: rgb(243, 243, 243);
+  /* margin: auto; */
+}
+
+input {
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 0.2rem;
+}
+input:focus {
+  outline: none;
+}
+
+#registerForm > form > * {
+  margin-bottom: 3%;
+  margin-top: 3%;
+}
+#bdate_inputs {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.txtInput,
+label,
+p {
+  height: 10%;
+  width: 100%;
+}
+#btnRegister {
+  height: 10%;
+  width: 30%;
+}

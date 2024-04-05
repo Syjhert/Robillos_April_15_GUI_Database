@@ -1,0 +1,32 @@
+#loggedin-cont {
+  border: 1px solid black;
+
+  margin: 1rem auto 0 auto;
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+p {
+  text-align: justify;
+}
+
+input[type="submit"][name="btnLogin"] {
+  margin-top: 1rem;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+#txtMessage {
+  width: 30rem;
+  height: 10rem;
+}
+
+#tblMessage {
+  width: 100%;
+  padding: 30px;
+  border: 1px solid black;
+}
