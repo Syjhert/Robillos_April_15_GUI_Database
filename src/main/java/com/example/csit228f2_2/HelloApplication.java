@@ -28,18 +28,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HelloApplication extends Application {
-    public static List<User> users;
+    public static int userID;
+    public static boolean isLatestNewEntry;
+    public static Stage mainStage;
+    public static Scene mainScene;
     public static void main(String[] args) {
         launch();
     }
-
     @Override
-    public void start(Stage stage) throws Exception {
-        users = new ArrayList<>();
-        // LOAD USERS
-        users.add(new User("tsgtest", "123456"));
-        users.add(new User("jayvince", "secret"));
-        users.add(new User("russselll", "palma"));
+    public void start(Stage stage) {
+        mainStage = stage;
 
         AnchorPane pnMain = new AnchorPane();
         GridPane grid = new GridPane();
@@ -115,8 +113,13 @@ public class HelloApplication extends Application {
                 String username = tfUsername.getText();
                 String password = pfPassword.getText();
 
-                if (!SQLOperations.checkIfDataExists(username, password)) {
+                isLatestNewEntry = false;
+
+                userID = SQLOperations.checkIfDataExists(username, password);
+                if (userID == -1) {
                     SQLOperations.insertData(username, password);
+                    isLatestNewEntry = true;
+                    userID = SQLOperations.checkIfDataExists(username, password);
                 }
 
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
@@ -141,6 +144,7 @@ public class HelloApplication extends Application {
 
 
         Scene scene = new Scene(pnMain, 700, 560);
+        mainScene = scene;
         stage.setScene(scene);
         stage.show();
     }
