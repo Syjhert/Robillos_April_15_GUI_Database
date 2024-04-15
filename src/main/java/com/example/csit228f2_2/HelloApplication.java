@@ -114,20 +114,19 @@ public class HelloApplication extends Application {
             public void handle(ActionEvent actionEvent) {
                 String username = tfUsername.getText();
                 String password = pfPassword.getText();
-                for (User user : users) {
-                    if (username.equals(user.username) && password.equals(user.password)) {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
-                        try {
-                            Scene scene = new Scene(loader.load());
-                            stage.setScene(scene);
-                            stage.show();
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
+
+                if (!SQLOperations.checkIfDataExists(username, password)) {
+                    SQLOperations.insertData(username, password);
                 }
-                actionTarget.setText("Invalid username/password");
-                actionTarget.setOpacity(1);
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+                try {
+                    Scene scene = new Scene(loader.load());
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
