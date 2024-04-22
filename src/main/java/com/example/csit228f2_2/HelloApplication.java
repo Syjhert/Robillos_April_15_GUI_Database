@@ -12,8 +12,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Font;
@@ -22,14 +20,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 public class HelloApplication extends Application {
-    public static int userID;
-    public static boolean isLatestNewEntry;
     public static Stage mainStage;
     public static Scene mainScene;
     public static void main(String[] args) {
@@ -37,6 +29,8 @@ public class HelloApplication extends Application {
     }
     @Override
     public void start(Stage stage) {
+        SQLOperations.initTables();
+
         mainStage = stage;
 
         AnchorPane pnMain = new AnchorPane();
@@ -113,16 +107,21 @@ public class HelloApplication extends Application {
                 String username = tfUsername.getText();
                 String password = pfPassword.getText();
 
-                isLatestNewEntry = false;
+                if(username.isEmpty() || password.isEmpty()) return;
 
-                userID = SQLOperations.checkIfDataExists(username, password);
+                int userID = SQLOperations.getUserID(username); //if not exists, -1
                 if (userID == -1) {
-                    SQLOperations.insertData(username, password);
-                    isLatestNewEntry = true;
-                    userID = SQLOperations.checkIfDataExists(username, password);
+                    SQLOperations.insertUser(username, password);
+                    Alerts.showInformation("New Entry Saved", "This account is new and is now saved!");
+                    userID = SQLOperations.getUserID(username);
+                }else if (!SQLOperations.checkPassword(userID, password)){
+                    Alerts.showInformation("Entry not allowed", "Incorrect Password");
+                    return;
                 }
+                CurrentUser.setUserID(userID);
+                CurrentUser.setUsername(username);
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("messages.fxml"));
                 try {
                     Scene scene = new Scene(loader.load());
                     stage.setScene(scene);
@@ -147,5 +146,10 @@ public class HelloApplication extends Application {
         mainScene = scene;
         stage.setScene(scene);
         stage.show();
+    }
+
+    public static void returnToMainScene(){
+        HelloApplication.mainStage.setScene(HelloApplication.mainScene);
+        HelloApplication.mainStage.show();
     }
 }

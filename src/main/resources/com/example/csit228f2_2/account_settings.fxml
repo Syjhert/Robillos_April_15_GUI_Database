@@ -5,14 +5,19 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="560.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.csit228f2_2.HelloController">
+<AnchorPane prefHeight="560.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.csit228f2_2.AccountSettingsController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
    <children>
       <VBox layoutX="27.0" layoutY="34.0" prefHeight="510.0" prefWidth="655.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="78.0" prefWidth="446.0">
+            <HBox alignment="TOP_RIGHT" prefHeight="22.0" prefWidth="655.0">
+               <children>
+                  <Button fx:id="btnClose" alignment="TOP_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#onCloseAccountSettingsClick" text="Close" textFill="RED" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="34.0" prefWidth="655.0">
                <children>
                   <Label fx:id="lblWelcomeText" text="Welcome !">
                      <font>

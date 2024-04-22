@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="560.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.csit228f2_2.MessageController">
+   <children>
+      <VBox prefHeight="560.0" prefWidth="700.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <GridPane alignment="CENTER" prefHeight="100.0" prefWidth="715.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="591.0" minWidth="10.0" prefWidth="591.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="172.60000000000002" minWidth="0.0" prefWidth="108.60000000000002" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Label text="Self Messages" GridPane.halignment="CENTER">
+                           <font>
+                              <Font size="37.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="btnAccountSettings" mnemonicParsing="false" onAction="#onAccountSettingsClick" prefHeight="42.0" prefWidth="76.0" text="Account Settings" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                     </children>
+                  </GridPane>
+               </children></HBox>
+            <ScrollPane prefHeight="377.0" prefWidth="700.0">
+               <content>
+                  <VBox fx:id="vbMessagesWrapper" prefHeight="380.0" prefWidth="684.0" />
+               </content>
+            </ScrollPane>
+            <HBox alignment="CENTER" prefHeight="64.0" prefWidth="700.0">
+               <children>
+                  <GridPane prefHeight="64.0" prefWidth="654.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="564.6" minWidth="10.0" prefWidth="564.6" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="105.0" minWidth="10.0" prefWidth="97.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <TextArea fx:id="taMessage" prefHeight="47.0" prefWidth="501.0" promptText="Your message..." wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                        <Button fx:id="btnSendMessage" mnemonicParsing="false" onAction="#onSendMessageClick" prefHeight="36.0" prefWidth="60.0" text="Send" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                     </children>
+                  </GridPane>
+               </children>
+            </HBox>
+         </children></VBox>
+   </children>
+</AnchorPane>
