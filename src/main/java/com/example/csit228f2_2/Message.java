@@ -5,11 +5,13 @@ public class Message {
     private int userID;
     private String content;
     private String dateTimeSent;
-    public Message(int messageID, int userID, String content, String dateTimeSent){
+    private boolean isEdited;
+    public Message(int messageID, int userID, String content, String dateTimeSent, boolean isEdited){
         this.messageID = messageID;
         this.userID = userID;
         this.content = content;
         this.dateTimeSent = dateTimeSent;
+        this.isEdited = isEdited;
     }
     public Message(int userID, String content, String dateTimeSent){    //for inserting
         messageID = -1;
@@ -32,5 +34,9 @@ public class Message {
 
     public String getDateTimeSent() {
         return dateTimeSent;
+    }
+
+    public boolean isEdited() {
+        return isEdited;
     }
 }

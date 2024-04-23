@@ -1,3 +1,5 @@
-.root {
-    -fx-background-color: black;
+.message-container {
+    -fx-border-color: black;
+    -fx-padding: 5px;
+    -fx-border-insets: 10px;
 }

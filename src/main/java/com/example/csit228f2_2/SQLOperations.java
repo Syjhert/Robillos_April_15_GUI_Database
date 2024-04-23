@@ -6,7 +6,7 @@ import java.util.List;
 
 public class SQLOperations {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/robillosjava";
+    private static final String URL = "jdbc:mysql://localhost:3306/javadb";
     private static final String USERNAME = "syjhert";
     private static final String PASSWORD = "syjhert";
     private static Connection getConnection(){
@@ -34,6 +34,7 @@ public class SQLOperations {
                     "userID INT NOT NULL," +
                     "content VARCHAR(200) NOT NULL," +
                     "dateTimeSent DATETIME NOT NULL," +
+                    "isEdited INT(1) NOT NULL DEFAULT 0," +
                     "FOREIGN KEY (userID) REFERENCES tbluser(userID) ON UPDATE CASCADE ON DELETE CASCADE" +
                     ")";
             statement.execute(createUserTableQuery);
@@ -185,7 +186,7 @@ public class SQLOperations {
         try(Connection c = getConnection();
             Statement statement = c.createStatement()){
 
-            String sqlUpdate = "UPDATE tblmessage SET content='"+content+"' WHERE messageID="+messageID;
+            String sqlUpdate = "UPDATE tblmessage SET content='"+content+"', isEdited=1 WHERE messageID="+messageID;
             int rowsUpdated = statement.executeUpdate(sqlUpdate);
 
             if(rowsUpdated > 0){
@@ -204,7 +205,7 @@ public class SQLOperations {
             int rowsDeleted = statement.executeUpdate(sqlDelete);
 
             if(rowsDeleted > 0){
-                System.out.println("User deleted successfully");
+                System.out.println("Message deleted successfully");
             }
         }catch(SQLException e){
             e.printStackTrace();
@@ -225,7 +226,8 @@ public class SQLOperations {
                         resultSet.getInt("messageID"),
                         resultSet.getInt("userID"),
                         resultSet.getString("content"),
-                        resultSet.getString("dateTimeSent")
+                        resultSet.getString("dateTimeSent"),
+                        resultSet.getInt("isEdited") == 1
                 );
                 messages.add(m);
             }

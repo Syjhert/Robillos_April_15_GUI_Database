@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 
 import java.io.IOException;
+import java.util.Objects;
 
 
 public class AccountSettingsController {
@@ -70,6 +71,7 @@ public class AccountSettingsController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("messages.fxml"));
         try {
             Scene scene = new Scene(loader.load());
+            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("styles.css")).toExternalForm());
             HelloApplication.mainStage.setScene(scene);
             HelloApplication.mainStage.show();
         } catch (IOException e) {

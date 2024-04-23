@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="560.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.csit228f2_2.EditMessageController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+    <children>
+        <VBox alignment="CENTER" layoutX="27.0" layoutY="34.0" prefHeight="510.0" prefWidth="655.0">
+            <children>
+            <HBox alignment="TOP_RIGHT" prefHeight="19.0" prefWidth="655.0">
+               <children>
+                        <Button fx:id="btnCloseEditMessage" alignment="TOP_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#onCloseEditMessageClick" text="Close" textFill="RED" />
+               </children>
+            </HBox>
+                  <Label fx:id="lblWelcomeText" text="Edit Message">
+                      <font>
+                          <Font size="20.0" />
+                      </font>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Label>
+            <HBox alignment="CENTER">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+               <children>
+                  <TextArea fx:id="taEditMessage" prefHeight="142.0" prefWidth="530.0" wrapText="true">
+                     <font>
+                        <Font name="Arial" size="20.0" />
+                     </font>
+                  </TextArea>
+               </children>
+            </HBox>
+                  <Button fx:id="btnDoneEditMessage" mnemonicParsing="false" onAction="#onDoneEditMessageClick" text="Done">
+                      <font>
+                          <Font size="20.0" />
+                      </font>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Button>
+            </children></VBox>
+    </children>
+</AnchorPane>

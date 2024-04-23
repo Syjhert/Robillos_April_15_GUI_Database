@@ -20,6 +20,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class HelloApplication extends Application {
     public static Stage mainStage;
@@ -115,7 +116,7 @@ public class HelloApplication extends Application {
                     Alerts.showInformation("New Entry Saved", "This account is new and is now saved!");
                     userID = SQLOperations.getUserID(username);
                 }else if (!SQLOperations.checkPassword(userID, password)){
-                    Alerts.showInformation("Entry not allowed", "Incorrect Password");
+                    Alerts.showInformation("Incorrect Password", "This username is taken and you entered the incorrect password");
                     return;
                 }
                 CurrentUser.setUserID(userID);
@@ -124,6 +125,7 @@ public class HelloApplication extends Application {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("messages.fxml"));
                 try {
                     Scene scene = new Scene(loader.load());
+                    scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("styles.css")).toExternalForm());
                     stage.setScene(scene);
                     stage.show();
                 } catch (IOException e) {
