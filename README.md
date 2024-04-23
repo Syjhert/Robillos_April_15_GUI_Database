@@ -1,1 +1,1 @@
-db name: robillosjava
+db name: javadb
