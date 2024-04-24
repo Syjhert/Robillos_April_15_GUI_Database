@@ -24,21 +24,26 @@ public class SQLOperations {
     public static void initTables(){
         try(Connection c = getConnection();
             Statement statement = c.createStatement()){
-            String createUserTableQuery = "CREATE TABLE IF NOT EXISTS tbluser(" +
+
+            c.setAutoCommit(false);
+
+            statement.addBatch("CREATE TABLE IF NOT EXISTS tbluser(" +
                     "userID INT AUTO_INCREMENT PRIMARY KEY," +
                     "username VARCHAR(50) NOT NULL," +
                     "password VARCHAR(100) NOT NULL" +
-                    ")";
-            String createMessageTableQuery = "CREATE TABLE IF NOT EXISTS tblmessage(" +
+                    ")");
+
+            statement.addBatch("CREATE TABLE IF NOT EXISTS tblmessage(" +
                     "messageID INT AUTO_INCREMENT PRIMARY KEY," +
                     "userID INT NOT NULL," +
                     "content VARCHAR(200) NOT NULL," +
                     "dateTimeSent DATETIME NOT NULL," +
                     "isEdited INT(1) NOT NULL DEFAULT 0," +
                     "FOREIGN KEY (userID) REFERENCES tbluser(userID) ON UPDATE CASCADE ON DELETE CASCADE" +
-                    ")";
-            statement.execute(createUserTableQuery);
-            statement.execute(createMessageTableQuery);
+                    ")");
+            statement.executeBatch();
+
+            c.commit();
 
         }catch (SQLException e){
             e.printStackTrace();
