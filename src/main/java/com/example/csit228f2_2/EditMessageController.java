@@ -37,8 +37,7 @@ public class EditMessageController {
     @FXML
     private void onDoneEditMessageClick(){
         String newContent = taEditMessage.getText();
-        SQLOperations.updateMessageContent(prevMessage.getMessageID(), newContent);
-        Alerts.showInformation("Data updated successfully", "The message was edited successfully");
+        SQLOperations.updateMessageContent(prevMessage, newContent);
         goBackToMessages();
     }
 }

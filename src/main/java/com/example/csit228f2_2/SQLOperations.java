@@ -182,16 +182,31 @@ public class SQLOperations {
         }
     }
 
-    public static void updateMessageContent(int messageID, String content){
+    //SET AUTO COMMIT FALSE
+    public static void updateMessageContent(Message message, String content){
         try(Connection c = getConnection();
             Statement statement = c.createStatement()){
 
-            String sqlUpdate = "UPDATE tblmessage SET content='"+content+"', isEdited=1 WHERE messageID="+messageID;
-            int rowsUpdated = statement.executeUpdate(sqlUpdate);
+            c.setAutoCommit(false);
 
-            if(rowsUpdated > 0){
-                System.out.println("Message content updated successfully");
+            String sqlCheckIfEdited = "SELECT isEdited FROM tblmessage WHERE messageID=" + message.getMessageID();
+            ResultSet rs = statement.executeQuery(sqlCheckIfEdited);
+            rs.next();
+
+            boolean isEditedPrior = rs.getInt("isEdited") == 1;
+
+            String sqlUpdate = "UPDATE tblmessage SET content='"+content+"', isEdited=1 WHERE messageID="+message.getMessageID();
+            statement.execute(sqlUpdate);
+
+            //if new content is the same with previous content, revoke isEdited status
+            //but if message was already edited, no need to revoke isEdited status
+            if(!isEditedPrior && message.getContent().equals(content)){
+                String sqlRevokeEdited = "UPDATE tblmessage SET isEdited=0 WHERE messageId=" + message.getMessageID();
+                statement.execute(sqlRevokeEdited);
             }
+
+            c.commit();
+
         }catch(SQLException e){
             e.printStackTrace();
         }
