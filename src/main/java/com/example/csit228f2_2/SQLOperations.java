@@ -8,7 +8,7 @@ public class SQLOperations {
 
     private static final String URL = "jdbc:mysql://localhost:3306/javadb";
     private static final String USERNAME = "syjhert";
-    private static final String PASSWORD = "syjhert";
+    private static final String PASSWORD = "123456";
     private static Connection getConnection(){
         Connection c = null;
         try{

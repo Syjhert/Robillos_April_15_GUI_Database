@@ -112,6 +112,9 @@ public class HelloApplication extends Application {
 
                 int userID = SQLOperations.getUserID(username); //if not exists, -1
                 if (userID == -1) {
+                    if(!Alerts.showConfirm("Create new entry?", "This entry is new. Do you want to create a new entry with this data?")){
+                        return;
+                    }
                     SQLOperations.insertUser(username, password);
                     Alerts.showInformation("New Entry Saved", "This account is new and is now saved!");
                     userID = SQLOperations.getUserID(username);
